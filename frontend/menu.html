@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <title>Coffee Shop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu | Coffee Shop</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
 </head>
+
 <body>
-    <header class="header">
+    <header class="site-header">
+        <div class="header-inner">
+        <div class="logo">Coffee.</div>
+
         <nav class="nav">
             <a href="/index.html">Home</a>
-            <a class="active" href="/menu.html">Menu</a>
+            <a href="/menu.html" class="active">Menu</a>
             <a href="/about.html">About</a>
             <a href="/contacts.html">Contacts</a>
         </nav>
+
+        <button id="cart-toggle" class="cart-toggle">
+            🛒 <span id="cart-count">0</span>
+        </button>
+        </div>
     </header>
-      
-    <section class="menu-section">
-        <h2>☕ Hot Drinks</h2>
-        <div class="menu-grid" id="hot-drinks"></div>
-    </section>
-      
-    <section class="menu-section">
-        <h2>🧊 Cold Drinks</h2>
-        <div class="menu-grid" id="cold-drinks"></div>
-    </section>
-      
-    <section class="menu-section">
-        <h2>🥐 Breakfasts</h2>
-        <div class="menu-grid" id="breakfasts"></div>
-    </section>
-      
-      
-    <script type="module" src="/js/menu.js"></script>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <aside id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+        <h3>Your order</h3>
+        <button id="cart-close">✕</button>
+        </div>
+
+        <ul id="cart-items"></ul>
+
+        <div class="cart-footer">
+        <p>Total: <strong><span id="cart-total">0.00</span> zł</strong></p>
+        <button class="checkout-btn">Checkout</button>
+        </div>
+    </aside>
+
+    <main class="menu">
+        <h1 class="menu-title">Menu</h1>
+
+        <div class="menu-controls">
+        <div class="categories">
+            <button class="cat-btn active" data-category="all">All</button>
+            <button class="cat-btn" data-category="hot">Hot Drinks</button>
+            <button class="cat-btn" data-category="cold">Cold Drinks</button>
+            <button class="cat-btn" data-category="seasonal">Seasonal</button>
+            <button class="cat-btn" data-category="tea">Tea & Other</button>
+            <button class="cat-btn" data-category="smoothies">Smoothies</button>
+            <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+        </div>
+
+        <select id="sort">
+            <option value="default">Sort by price</option>
+            <option value="asc">Price: Low → High</option>
+            <option value="desc">Price: High → Low</option>
+        </select>
+        </div>
+
+        <div id="menu-container"></div>
+    </main>
+
+    <script src="/js/menu.js"></script>
 </body>
 </html>
