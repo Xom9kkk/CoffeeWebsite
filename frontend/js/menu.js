@@ -265,6 +265,73 @@ function closeCart() {
 cartOverlay.addEventListener("click", closeCart);
 cartClose.addEventListener("click", closeCart);
 
+const checkoutBtn = document.querySelector(".checkout-btn");
+const checkoutModal = document.getElementById("checkout-modal");
+const checkoutOverlay = document.getElementById("checkout-overlay");
+const checkoutClose = document.getElementById("checkout-close");
+
+checkoutBtn.addEventListener("click", () => {
+  checkoutModal.classList.add("open");
+  checkoutOverlay.classList.add("active");
+});
+
+checkoutClose.addEventListener("click", closeCheckout);
+checkoutOverlay.addEventListener("click", closeCheckout);
+
+function closeCheckout() {
+  checkoutModal.classList.remove("open");
+  checkoutOverlay.classList.remove("active");
+}
+
+const confirmBtn = document.querySelector(".confirm-btn");
+
+confirmBtn.addEventListener("click", () => {
+  if (cart.length === 0) {
+    showToast("🛑 Cart is empty");
+    return;
+  }
+
+  const paymentMethod = document.querySelector(
+    'input[name="payment"]:checked'
+  ).value;
+
+  handleCheckout(paymentMethod);
+});
+
+function handleCheckout(method) {
+  switch (method) {
+    case "cash":
+      completeOrder("💵 Cash payment selected");
+      break;
+
+    case "card":
+      completeOrder("💳 Card payment selected");
+      break;
+
+    case "applepay":
+      completeOrder("🍎 Apple Pay selected");
+      break;
+
+    default:
+      showToast("❌ Payment error");
+  }
+}
+
+function completeOrder(message) {
+  showToast(message);
+
+  setTimeout(() => {
+    showToast("✅ Order confirmed. Thank you!");
+
+    cart = [];
+    saveCart();
+    updateCartUI();
+
+    closeCheckout();
+    closeCart();
+  }, 1000);
+}
+
 
 loadCart();
 renderMenu();

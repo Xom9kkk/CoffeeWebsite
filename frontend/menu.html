@@ -14,75 +14,105 @@
 </head>
 
 <body>
-
-  <header class="site-header hero">
-    <div class="header-inner">
-      <div class="nav-logo">
-        <a href="index.html">
-          <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
-        </a>
-      </div>      
-
-      <nav class="nav">
-        <div class="nav-buttons">
-          <a href="#shop">Our shop <sup>NEW</sup></a>
-          <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
-          <a href="#us">About Us</a>
-          <a href="#location">Locations</a>
+    <header class="site-header hero">
+      <div class="header-inner">
+        <div class="nav-logo">
+          <a href="index.html">
+            <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
+          </a>
         </div>
-      </nav>
-      
-    </div>
-  </header>
+        
+        <nav class="nav">
+          <div class="nav-buttons">
+            <a href="#shop">Our shop <sup>NEW</sup></a>
+            <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
+            <a href="#us">About Us</a>
+            <a href="#location">Locations</a>
+          </div>
+        </nav>
+        
+      </div>
+    </header>
 
-  <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-overlay" class="cart-overlay"></div>
 
-  <aside id="cart-drawer" class="cart-drawer">
-    <div class="cart-header">
-      <h3>Your order</h3>
-      <button id="cart-close">✕</button>
-    </div>
-
-    <ul id="cart-items"></ul>
-
-    <div class="cart-footer">
-      <p>Total: <strong><span id="cart-total">0.00</span> zł</strong></p>
-      <button class="checkout-btn">Checkout</button>
-    </div>
-  </aside>
-
-  <main class="menu">
-    <h1 class="menu-title">Menu</h1>
-
-    <div class="menu-controls">
-      <div class="categories">
-        <button class="cat-btn active" data-category="all">All</button>
-        <button class="cat-btn" data-category="hot">Hot Drinks</button>
-        <button class="cat-btn" data-category="cold">Cold Drinks</button>
-        <button class="cat-btn" data-category="seasonal">Seasonal</button>
-        <button class="cat-btn" data-category="tea">Tea & Other</button>
-        <button class="cat-btn" data-category="smoothies">Smoothies</button>
-        <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+    <aside id="cart-drawer" class="cart-drawer">
+      <div class="cart-header">
+        <h3>Your order</h3>
+        <button id="cart-close">✕</button>
       </div>
 
-      <select id="sort">
-        <option value="default">Sort by price</option>
-        <option value="asc">Price: Low → High</option>
-        <option value="desc">Price: High → Low</option>
-      </select>
+      <ul id="cart-items"></ul>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <strong><span id="cart-total">0.00</span> zł</strong>
+        </div>                
+        <button class="checkout-btn">Checkout</button>
+      </div>
+    </aside>
+
+    <main class="menu">
+      <h1 class="menu-title">Menu</h1>
+
+      <div class="menu-controls">
+        <div class="categories">
+          <button class="cat-btn active" data-category="all">All</button>
+          <button class="cat-btn" data-category="hot">Hot Drinks</button>
+          <button class="cat-btn" data-category="cold">Cold Drinks</button>
+          <button class="cat-btn" data-category="seasonal">Seasonal</button>
+          <button class="cat-btn" data-category="tea">Tea & Other</button>
+          <button class="cat-btn" data-category="smoothies">Smoothies</button>
+          <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+        </div>
+
+        <select id="sort">
+          <option value="default">Sort by price</option>
+          <option value="asc">Price: Low → High</option>
+          <option value="desc">Price: High → Low</option>
+        </select>
+      </div>
+
+      <div id="menu-container"></div>
+    </main>
+
+    <button id="cart-toggle" class="cart-toggle floating-cart" aria-label="Open cart">
+      🛒 <span id="cart-count">0</span>
+    </button>
+
+    <div id="checkout-overlay" class="checkout-overlay"></div>
+
+
+  <div id="checkout-modal" class="checkout-modal">
+    <div class="checkout-header">
+      <h3>Payment method</h3>
+      <button id="checkout-close">✕</button>
     </div>
 
-    <div id="menu-container"></div>
-  </main>
+    <div class="checkout-options">
+      <label class="pay-option">
+        <input type="radio" name="payment" value="cash" checked />
+        <span class="pay-icon">💵</span>
+        <span class="pay-text">Cash</span>
+      </label>
+      
+      <label class="pay-option">
+        <input type="radio" name="payment" value="card" />
+        <span class="pay-icon">💳</span>
+        <span class="pay-text">Card</span>
+      </label>
+      
+      <label class="pay-option apple">
+        <input type="radio" name="payment" value="applepay" />
+        <span class="pay-icon">🍎</span>
+        <span class="pay-text">Apple Pay</span>
+      </label>
+    </div>
 
-  <button
-    id="cart-toggle"
-    class="cart-toggle floating-cart"
-    aria-label="Open cart"
-  >
-    🛒 <span id="cart-count">0</span>
-  </button>
+    <button class="confirm-btn">Confirm order</button>
+  </div>
 
-  <script src="/js/menu.js"></script>
+    <script src="/js/menu.js"></script>
 </body>
 </html>
