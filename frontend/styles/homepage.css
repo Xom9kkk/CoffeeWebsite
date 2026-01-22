@@ -6,6 +6,7 @@ body {
   position: relative;
   height: 500px;
   background: url("../images/homepage/background.jpg") center / cover no-repeat;
+  border-bottom: 3px solid black;
 }
 .nav {
   display: flex;
@@ -30,21 +31,6 @@ body {
   color: #000;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-}
-.nav-buttons a:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 0;
-  height: 2px;
-  background: #000;
-  transition: width 0.3s ease;
-}
-
-.nav-buttons a:hover::after,
-.nav-buttons a.active::after {
-  width: 100%;
 }
 .nav-buttons a:hover {
   color: #f55a34;
@@ -104,4 +90,51 @@ body {
 .btn:hover span::after {
   opacity: 1;
   right: 0;
+}
+.choosing {
+  padding: 80px 40px;
+  background: #f55a34;
+}
+
+.choosing h2 {
+  max-width: 400px;
+  font-size: 26px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+
+.reasons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.reason {
+  background: #d3d5d0;
+  padding: 30px;
+  border-radius: 20px;
+  transition: transform 0.5s ease;
+}
+.reason:hover {
+  transform: translateY(-10px);
+  background: #fcfff9c0;
+}
+
+.reason img {
+  width: 50px;
+  margin-bottom: 16px;
+}
+
+.reason h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: rgb(61, 28, 7);
+}
+
+.reason p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.75;
 }
