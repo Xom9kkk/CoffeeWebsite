@@ -50,14 +50,6 @@ const breakfasts = [
   { title: "Breakfast Set", price: "35.00 zł", image: "/images/menu/breakfast6.jpg" }
 ];
 
-const categories = {
-    hot: hotDrinks,
-    cold: coldDrinks,
-    seasonal: seasonalDrinks,
-    tea: teaAndOther,
-    smoothies: smoothies,
-    breakfasts: breakfasts
-};
 
 const menuContainer = document.getElementById("menu-container");
 
@@ -66,222 +58,213 @@ let currentSort = "default";
 let cart = [];
 
 
+// Create single menu card HTML
 function createCard(item) {
-    return `
-        <div class="menu-card">
-        <img src="${item.image}" alt="${item.title}">
-        <div class="menu-card-content">
-            <h3>${item.title}</h3>
-            <p class="menu-price">${item.price}</p>
-  
+  return `
+    <div class="menu-card">
+      <img src="${item.image}" alt="${item.title}">
+      <div class="menu-card-content">
+        <h3>${item.title}</h3>
+        <p class="menu-price">${item.price}</p>
         <button 
-            class="order-btn"
-            data-title="${item.title}"
-            data-price="${item.price}">
-            Order
+          class="order-btn"
+          data-title="${item.title}"
+          data-price="${item.price}">
+          Order
         </button>
-        </div>
+      </div>
     </div>
-`;}
-  
+  `;
+}
 
+// Create menu section with sorting
 function renderSection(title, items) {
-    let sortedItems = [...items];
-  
-    if (currentSort === "asc") {
-        sortedItems.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    }
-    if (currentSort === "desc") {
-        sortedItems.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-    }
-  
-    let cardsHTML = sortedItems.map(createCard).join("");
-  
-    return `
-        <section class="menu-section">
-            <h2 class="menu-section-title">${title}</h2>
-            <div class="cards-grid">
-            ${cardsHTML}
-            </div>
-        </section>
-    `;
+  const sortedItems = [...items];
+
+  if (currentSort === "asc") {
+    sortedItems.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+  }
+  if (currentSort === "desc") {
+    sortedItems.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  }
+
+  return `
+    <section class="menu-section">
+      <h2 class="menu-section-title">${title}</h2>
+      <div class="cards-grid">
+        ${sortedItems.map(createCard).join("")}
+      </div>
+    </section>
+  `;
 }
 
-function render() {
-    menuContainer.innerHTML = "";
-  
-    if (currentCategory === "all") {
-        menuContainer.innerHTML += renderSection("Hot Drinks", hotDrinks);
-        menuContainer.innerHTML += renderSection("Cold Drinks", coldDrinks);
-        menuContainer.innerHTML += renderSection("Seasonal Drinks", seasonalDrinks);
-        menuContainer.innerHTML += renderSection("Tea & Other", teaAndOther);
-        menuContainer.innerHTML += renderSection("Smoothies", smoothies);
-        menuContainer.innerHTML += renderSection("Breakfasts", breakfasts);
-        return;
-    }
-  
-    const map = {
-        hot: ["Hot Drinks", hotDrinks],
-        cold: ["Cold Drinks", coldDrinks],
-        seasonal: ["Seasonal Drinks", seasonalDrinks],
-        tea: ["Tea & Other", teaAndOther],
-        smoothies: ["Smoothies", smoothies],
-        breakfasts: ["Breakfasts", breakfasts],
-    };
-  
-    const [title, items] = map[currentCategory];
-    menuContainer.innerHTML = renderSection(title, items);
+// Render menu based on selected category
+function renderMenu() {
+  menuContainer.innerHTML = "";
+
+  if (currentCategory === "all") {
+    menuContainer.innerHTML += renderSection("Hot Drinks", hotDrinks);
+    menuContainer.innerHTML += renderSection("Cold Drinks", coldDrinks);
+    menuContainer.innerHTML += renderSection("Seasonal Drinks", seasonalDrinks);
+    menuContainer.innerHTML += renderSection("Tea & Other", teaAndOther);
+    menuContainer.innerHTML += renderSection("Smoothies", smoothies);
+    menuContainer.innerHTML += renderSection("Breakfasts", breakfasts);
+    return;
+  }
+
+  const categoryMap = {
+    hot: ["Hot Drinks", hotDrinks],
+    cold: ["Cold Drinks", coldDrinks],
+    seasonal: ["Seasonal Drinks", seasonalDrinks],
+    tea: ["Tea & Other", teaAndOther],
+    smoothies: ["Smoothies", smoothies],
+    breakfasts: ["Breakfasts", breakfasts]
+  };
+
+  const [title, items] = categoryMap[currentCategory];
+  menuContainer.innerHTML = renderSection(title, items);
 }
 
+
+// Category buttons
 document.querySelectorAll(".cat-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        document.querySelector(".cat-btn.active").classList.remove("active");
-        btn.classList.add("active");
-  
-        currentCategory = btn.dataset.category;
-        render();
-    });
+  btn.addEventListener("click", () => {
+    document.querySelector(".cat-btn.active").classList.remove("active");
+    btn.classList.add("active");
+    currentCategory = btn.dataset.category;
+    renderMenu();
+  });
 });
-  
+
+// Sorting
 document.getElementById("sort").addEventListener("change", e => {
-    currentSort = e.target.value;
-    render();
+  currentSort = e.target.value;
+  renderMenu();
 });
 
-document.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("order-btn")) return;
-  
-    const title = e.target.dataset.title;
-    const price = e.target.dataset.price;
-  
-    addToOrder(title, price);
-});  
 
-function addToOrder(title, price) {
-    const numericPrice = parseFloat(price);
-  
-    const existingItem = cart.find(item => item.title === title);
-  
-    if (existingItem) {
-        existingItem.qty += 1;
-    } else {
-        cart.push({
-            title,
-            price: numericPrice,
-            qty: 1
-      });
-    }
+// Add product to cart
+function addToCart(title, price) {
+  const numericPrice = parseFloat(price);
+  const item = cart.find(p => p.title === title);
 
-    saveCart();
-    updateCartUI();
-    showToast(`☕ ${title} added`);
-}
-  
-function showToast(text) {
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.textContent = text;
-  
-    document.body.appendChild(toast);
-  
-    requestAnimationFrame(() => toast.classList.add("show"));
-  
-    setTimeout(() => {
-        toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 300);
-    }, 2000);
+  if (item) {
+    item.qty += 1;
+  } else {
+    cart.push({ title, price: numericPrice, qty: 1 });
+  }
+
+  saveCart();
+  updateCartUI();
+  showToast(`☕ ${title} added`);
 }
 
-function updateCartCount() {
-    document.getElementById("cart-count").textContent = cart.length;
-}  
+// Handle order button click
+document.addEventListener("click", e => {
+  if (!e.target.classList.contains("order-btn")) return;
+  addToCart(e.target.dataset.title, e.target.dataset.price);
+});
 
+// Update cart UI
 function updateCartUI() {
-    const countEl = document.getElementById("cart-count");
-    const totalEl = document.getElementById("cart-total");
-    const listEl = document.getElementById("cart-items");
-  
-    listEl.innerHTML = "";
-  
-    let total = 0;
-    let count = 0;
-  
-    cart.forEach((item, index) => {
-        total += item.price * item.qty;
-        count += item.qty;
-    
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <span>${item.title}</span>
-            <div class="cart-controls">
-            <button data-index="${index}" data-action="minus">−</button>
-            <span>${item.qty}</span>
-            <button data-index="${index}" data-action="plus">+</button>
-            <button data-index="${index}" data-action="remove">✕</button>
-            </div>
-      `;
-    listEl.appendChild(li);
-});
-  
-    countEl.textContent = count;
-    totalEl.textContent = total.toFixed(2);
+  const list = document.getElementById("cart-items");
+  const countEl = document.getElementById("cart-count");
+  const totalEl = document.getElementById("cart-total");
+
+  list.innerHTML = "";
+
+  let total = 0;
+  let count = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    count += item.qty;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span>${item.title}</span>
+      <div class="cart-controls">
+        <button data-index="${index}" data-action="minus">−</button>
+        <span>${item.qty}</span>
+        <button data-index="${index}" data-action="plus">+</button>
+        <button data-index="${index}" data-action="remove">✕</button>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+
+  countEl.textContent = count;
+  totalEl.textContent = total.toFixed(2);
 }
 
+// Cart buttons logic
 document.getElementById("cart-items").addEventListener("click", e => {
-    const btn = e.target;
-    if (!btn.dataset.action) return;
-  
-    const index = +btn.dataset.index;
-    const item = cart[index];
-  
-    if (btn.dataset.action === "plus") {
-        item.qty += 1;
-    }
-  
-    if (btn.dataset.action === "minus") {
-        item.qty -= 1;
-        if (item.qty <= 0) cart.splice(index, 1);
-    }
-  
-    if (btn.dataset.action === "remove") {
-        cart.splice(index, 1);
-    }
+  if (!e.target.dataset.action) return;
 
-    saveCart();
-    updateCartUI();
+  const index = +e.target.dataset.index;
+  const item = cart[index];
+
+  if (e.target.dataset.action === "plus") item.qty += 1;
+  if (e.target.dataset.action === "minus" && --item.qty <= 0) cart.splice(index, 1);
+  if (e.target.dataset.action === "remove") cart.splice(index, 1);
+
+  saveCart();
+  updateCartUI();
 });
-  
+
+// ===== LOCAL STORAGE =====
+
+// Save cart to localStorage
 function saveCart() {
-    localStorage.setItem("coffee-cart", JSON.stringify(cart));
+  localStorage.setItem("coffee-cart", JSON.stringify(cart));
 }
-  
-  function loadCart() {
-    const saved = localStorage.getItem("coffee-cart");
-    if (saved) {
-        cart = JSON.parse(saved);
-        updateCartUI();
-    }
+
+// Load cart on page load
+function loadCart() {
+  const saved = localStorage.getItem("coffee-cart");
+  if (saved) {
+    cart = JSON.parse(saved);
+    updateCartUI();
+  }
 }
+
+// ===== UI HELPERS =====
+
+// Toast notification
+function showToast(text) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = text;
+
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add("show"));
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+// ===== CART DRAWER =====
 
 const cartToggle = document.getElementById("cart-toggle");
 const cartDrawer = document.getElementById("cart-drawer");
 const cartOverlay = document.getElementById("cart-overlay");
 const cartClose = document.getElementById("cart-close");
 
-cartToggle.addEventListener("click", openCart);
+cartToggle.addEventListener("click", () => {
+  cartDrawer.classList.add("open");
+  cartOverlay.classList.add("active");
+});
+
+function closeCart() {
+  cartDrawer.classList.remove("open");
+  cartOverlay.classList.remove("active");
+}
+
 cartOverlay.addEventListener("click", closeCart);
 cartClose.addEventListener("click", closeCart);
 
-function openCart() {
-    cartDrawer.classList.add("open");
-    cartOverlay.classList.add("active");
-}
-
-function closeCart() {
-    cartDrawer.classList.remove("open");
-    cartOverlay.classList.remove("active");
-}
 
 loadCart();
-render();
-  
+renderMenu();
