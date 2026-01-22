@@ -31,6 +31,21 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
+.nav-buttons a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+.nav-buttons a:hover::after,
+.nav-buttons a.active::after {
+  width: 100%;
+}
 .nav-buttons a:hover {
   color: #f55a34;
   transition: 0.3s;
@@ -43,6 +58,14 @@ body {
   position: absolute;
   left: 40px;
   bottom: 120px;
+}
+.hero-coffee {
+  position: absolute;
+  right: -320px;
+  top: -60px;
+  width: 300px;
+  height: auto;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85));
 }
 
 .hero-content h1 {
