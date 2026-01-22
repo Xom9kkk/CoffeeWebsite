@@ -1,0 +1,84 @@
+body {
+  font-family: "Zalando Sans Expanded", Arial, sans-serif;
+  margin: 0;
+}
+.hero {
+  position: relative;
+  height: 500px;
+  background: url("../images/homepage/background.jpg") center / cover no-repeat;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3d5d0;
+  border-bottom: 3px solid black;
+  padding: 12px 40px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+.nav-logo img {
+  height: 52px;
+}
+.nav-buttons a {
+  margin-left: 28px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-buttons a:hover {
+  color: #f55a34;
+  transition: 0.3s;
+}
+.nav-buttons sup {
+  color: #f55a34;
+}
+
+.hero-content {
+  position: absolute;
+  left: 40px;
+  bottom: 120px;
+}
+
+.hero-content h1 {
+  font-size: 43px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+}
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #f55a34;
+  color: #000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 14px;
+}
+.btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: ">>";
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.btn:hover span {
+  padding-right: 22px;
+}
+
+.btn:hover span::after {
+  opacity: 1;
+  right: 0;
+}

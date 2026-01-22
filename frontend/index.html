@@ -1,30 +1,39 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Coffee</title>
-  <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/homepage.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>coffeelab</title>
+  </head>
 
-<header class="site-header">
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
-    <a href="about.html">About</a>
-    <a href="contacts.html">Contacts</a>
-  </nav>
-</header>
+  <body>
+    <section class="hero">
+      <header class="nav">
+        <div class="nav-logo">
+          <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
+        </div>
 
-<main class="container">
-  <h1>Welcome ☕</h1>
-  <p>Best coffee in town.</p>
-  <a class="btn" href="menu.html">View Menu</a>
-</main>
+        <div class="nav-buttons">
+          <a href="#shop">Our shop <sup>NEW</sup></a>
+          <a href="#menu">Menu<sup>NEW</sup></a>
+          <a href="#us">About Us</a>
+          <a href="#location">Locations</a>
+        </div>
+      </header>
 
-<footer class="site-footer">© 2026 Coffee</footer>
-
-<script src="js/main.js"></script>
-</body>
+      <div class="hero-content">
+        <h1>Brewed with precision.<br />Inspired by coffee.</h1>
+        <a href="#order" class="btn" style="vertical-align: middle"
+          ><span>Order now</span></a
+        >
+      </div>
+    </section>
+  </body>
 </html>
