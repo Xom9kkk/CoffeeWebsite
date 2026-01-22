@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Zalando Sans Expanded", Arial, sans-serif;
+  margin: 0;
+  background: #d3d5d0;
+  color: #111;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #d3d5d0;
+  border-bottom: 3px solid #000;
+}
+
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  height: 52px;
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-buttons a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000;
+  position: relative;
+}
+
+.nav-buttons a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.25s ease;
+}
+
+.nav-buttons a:hover::after {
+  width: 100%;
+}
+
+.nav-buttons a:hover {
+  color: #f55a34;
+}
+
+.nav-buttons sup {
+  margin-left: 4px;
+  font-size: 10px;
+  color: #f55a34;
+}
+
+.hero {
+  position: relative;
+  height: 500px;
+  background: url("../images/homepage/background.jpg") center / cover no-repeat;
+}
+
+.hero-content {
+  position: absolute;
+  left: 40px;
+  bottom: 120px;
+  max-width: 500px;
+}
+
+.hero-content h1 {
+  font-size: 43px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #f55a34;
+  color: #000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+}
+
+.btn span::after {
+  content: ">>";
+  position: absolute;
+  opacity: 0;
+  right: -18px;
+  transition: 0.4s;
+}
+
+.btn:hover span {
+  padding-right: 20px;
+}
+
+.btn:hover span::after {
+  opacity: 1;
+  right: 0;
+}

@@ -1,72 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu | Coffee Shop</title>
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | Coffee Shop</title>
+  <link rel="stylesheet" href="/styles/menu.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-        <div class="logo">Coffee.</div>
 
-        <nav class="nav">
-            <a href="/index.html">Home</a>
-            <a href="/menu.html" class="active">Menu</a>
-            <a href="/about.html">About</a>
-            <a href="/contacts.html">Contacts</a>
-        </nav>
+  <header class="site-header hero">
+    <div class="header-inner">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
+        </a>
+      </div>      
 
-        <button id="cart-toggle" class="cart-toggle">
-            🛒 <span id="cart-count">0</span>
-        </button>
+      <nav class="nav">
+        <div class="nav-buttons">
+          <a href="#shop">Our shop <sup>NEW</sup></a>
+          <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
+          <a href="#us">About Us</a>
+          <a href="#location">Locations</a>
         </div>
-    </header>
+      </nav>
+      
+    </div>
+  </header>
 
-    <div id="cart-overlay" class="cart-overlay"></div>
-    <aside id="cart-drawer" class="cart-drawer">
-        <div class="cart-header">
-        <h3>Your order</h3>
-        <button id="cart-close">✕</button>
-        </div>
+  <div id="cart-overlay" class="cart-overlay"></div>
 
-        <ul id="cart-items"></ul>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3>Your order</h3>
+      <button id="cart-close">✕</button>
+    </div>
 
-        <div class="cart-footer">
-        <p>Total: <strong><span id="cart-total">0.00</span> zł</strong></p>
-        <button class="checkout-btn">Checkout</button>
-        </div>
-    </aside>
+    <ul id="cart-items"></ul>
 
-    <main class="menu">
-        <h1 class="menu-title">Menu</h1>
+    <div class="cart-footer">
+      <p>Total: <strong><span id="cart-total">0.00</span> zł</strong></p>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </aside>
 
-        <div class="menu-controls">
-        <div class="categories">
-            <button class="cat-btn active" data-category="all">All</button>
-            <button class="cat-btn" data-category="hot">Hot Drinks</button>
-            <button class="cat-btn" data-category="cold">Cold Drinks</button>
-            <button class="cat-btn" data-category="seasonal">Seasonal</button>
-            <button class="cat-btn" data-category="tea">Tea & Other</button>
-            <button class="cat-btn" data-category="smoothies">Smoothies</button>
-            <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
-        </div>
+  <main class="menu">
+    <h1 class="menu-title">Menu</h1>
 
-        <select id="sort">
-            <option value="default">Sort by price</option>
-            <option value="asc">Price: Low → High</option>
-            <option value="desc">Price: High → Low</option>
-        </select>
-        </div>
+    <div class="menu-controls">
+      <div class="categories">
+        <button class="cat-btn active" data-category="all">All</button>
+        <button class="cat-btn" data-category="hot">Hot Drinks</button>
+        <button class="cat-btn" data-category="cold">Cold Drinks</button>
+        <button class="cat-btn" data-category="seasonal">Seasonal</button>
+        <button class="cat-btn" data-category="tea">Tea & Other</button>
+        <button class="cat-btn" data-category="smoothies">Smoothies</button>
+        <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+      </div>
 
-        <div id="menu-container"></div>
-    </main>
+      <select id="sort">
+        <option value="default">Sort by price</option>
+        <option value="asc">Price: Low → High</option>
+        <option value="desc">Price: High → Low</option>
+      </select>
+    </div>
 
-    <script src="/js/menu.js"></script>
+    <div id="menu-container"></div>
+  </main>
+
+  <button
+    id="cart-toggle"
+    class="cart-toggle floating-cart"
+    aria-label="Open cart"
+  >
+    🛒 <span id="cart-count">0</span>
+  </button>
+
+  <script src="/js/menu.js"></script>
 </body>
 </html>
