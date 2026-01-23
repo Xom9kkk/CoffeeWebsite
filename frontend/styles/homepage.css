@@ -91,11 +91,11 @@ body {
   opacity: 1;
   right: 0;
 }
+
 .choosing {
   padding: 80px 40px;
   background: #f55a34;
 }
-
 .choosing h2 {
   max-width: 400px;
   font-size: 26px;
@@ -104,13 +104,11 @@ body {
   margin-top: -40px;
   margin-bottom: 40px;
 }
-
 .reasons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 48px;
 }
-
 .reason {
   background: #d3d5d0;
   padding: 30px;
@@ -121,20 +119,115 @@ body {
   transform: translateY(-10px);
   background: #fcfff9c0;
 }
-
 .reason img {
   width: 50px;
   margin-bottom: 16px;
 }
-
 .reason h3 {
   font-size: 18px;
   margin-bottom: 12px;
   color: rgb(61, 28, 7);
 }
-
 .reason p {
   font-size: 14px;
   line-height: 1.6;
   opacity: 0.75;
+}
+
+.blends {
+  padding: 40px;
+
+  background:
+    linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(61, 28, 7, 0.92) 50%),
+    url("../images/homepage/beans_section.jpg") center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.blends h2 {
+  font-size: 26px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  max-width: 420px;
+}
+
+.slideshow {
+  position: relative;
+  max-width: 460px;
+}
+
+.mySlides {
+  display: none;
+}
+.slide-content {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 32px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  animation: fadeSlide 0.6s ease;
+}
+.slide-content h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: rgb(61, 28, 7);
+  letter-spacing: 0.05em;
+}
+.description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgb(61, 28, 7);
+}
+.numbertext {
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  font-size: 22px;
+
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+
+.prev {
+  left: -60px;
+}
+
+.next {
+  right: -60px;
+}
+
+.prev:hover,
+.next:hover {
+  background: #f55a34;
+  transform: translateY(-50%) scale(1.1);
+}
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
