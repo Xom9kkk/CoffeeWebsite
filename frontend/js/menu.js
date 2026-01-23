@@ -51,15 +51,12 @@ const breakfasts = [
   { title: "Breakfast Set", price: "35.00 zł", image: "/images/menu/breakfast6.jpg" }
 ];
 
-
 const menuContainer = document.getElementById("menu-container");
 
 let currentCategory = "all";
 let currentSort = "default";
 let cart = [];
 
-
-// Create single menu card HTML
 function createCard(item) {
   return `
     <div class="menu-card">
@@ -67,8 +64,7 @@ function createCard(item) {
       <div class="menu-card-content">
         <h3>${item.title}</h3>
         <p class="menu-price">${item.price}</p>
-        <button 
-          class="order-btn"
+        <button class="order-btn"
           data-title="${item.title}"
           data-price="${item.price}">
           Order
@@ -78,16 +74,22 @@ function createCard(item) {
   `;
 }
 
-// Create menu section with sorting
-function renderSection(title, items) {
-  const sortedItems = [...items];
+function sortItems(items) {
+  const sorted = [...items];
 
   if (currentSort === "asc") {
-    sortedItems.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
   }
+
   if (currentSort === "desc") {
-    sortedItems.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
   }
+
+  return sorted;
+}
+
+function renderSection(title, items) {
+  const sortedItems = sortItems(items);
 
   return `
     <section class="menu-section">
@@ -99,7 +101,6 @@ function renderSection(title, items) {
   `;
 }
 
-// Render menu based on selected category
 function renderMenu() {
   menuContainer.innerHTML = "";
 
@@ -113,41 +114,38 @@ function renderMenu() {
     return;
   }
 
-  const categoryMap = {
+  const map = {
     hot: ["Hot Drinks", hotDrinks],
     cold: ["Cold Drinks", coldDrinks],
     seasonal: ["Seasonal Drinks", seasonalDrinks],
     tea: ["Tea & Other", teaAndOther],
     smoothies: ["Smoothies", smoothies],
-    breakfasts: ["Breakfasts", breakfasts]
+    breakfasts: ["Breakfasts", breakfasts],
   };
 
-  const [title, items] = categoryMap[currentCategory];
+  const [title, items] = map[currentCategory];
   menuContainer.innerHTML = renderSection(title, items);
 }
 
-
-// Category buttons
 document.querySelectorAll(".cat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelector(".cat-btn.active").classList.remove("active");
+    document.querySelector(".cat-btn.active")?.classList.remove("active");
     btn.classList.add("active");
+
     currentCategory = btn.dataset.category;
     renderMenu();
   });
 });
 
-// Sorting
 document.getElementById("sort").addEventListener("change", e => {
   currentSort = e.target.value;
   renderMenu();
 });
 
 
-// Add product to cart
 function addToCart(title, price) {
   const numericPrice = parseFloat(price);
-  const item = cart.find(p => p.title === title);
+  const item = cart.find(i => i.title === title);
 
   if (item) {
     item.qty += 1;
@@ -160,13 +158,11 @@ function addToCart(title, price) {
   showToast(`☕ ${title} added`);
 }
 
-// Handle order button click
 document.addEventListener("click", e => {
   if (!e.target.classList.contains("order-btn")) return;
   addToCart(e.target.dataset.title, e.target.dataset.price);
 });
 
-// Update cart UI
 function updateCartUI() {
   const list = document.getElementById("cart-items");
   const countEl = document.getElementById("cart-count");
@@ -198,29 +194,25 @@ function updateCartUI() {
   totalEl.textContent = total.toFixed(2);
 }
 
-// Cart buttons logic
 document.getElementById("cart-items").addEventListener("click", e => {
-  if (!e.target.dataset.action) return;
+  const action = e.target.dataset.action;
+  if (!action) return;
 
   const index = +e.target.dataset.index;
   const item = cart[index];
 
-  if (e.target.dataset.action === "plus") item.qty += 1;
-  if (e.target.dataset.action === "minus" && --item.qty <= 0) cart.splice(index, 1);
-  if (e.target.dataset.action === "remove") cart.splice(index, 1);
+  if (action === "plus") item.qty += 1;
+  if (action === "minus" && --item.qty <= 0) cart.splice(index, 1);
+  if (action === "remove") cart.splice(index, 1);
 
   saveCart();
   updateCartUI();
 });
 
-// ===== LOCAL STORAGE =====
-
-// Save cart to localStorage
 function saveCart() {
   localStorage.setItem("coffee-cart", JSON.stringify(cart));
 }
 
-// Load cart on page load
 function loadCart() {
   const saved = localStorage.getItem("coffee-cart");
   if (saved) {
@@ -229,107 +221,82 @@ function loadCart() {
   }
 }
 
-// ===== UI HELPERS =====
-
-// Toast notification
 function showToast(text) {
+  const container = document.getElementById("toast-container");
+
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = text;
 
-  document.body.appendChild(toast);
+  container.appendChild(toast);
+
   requestAnimationFrame(() => toast.classList.add("show"));
 
   setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 300);
-  }, 2000);
+    toast.classList.add("hide");
+  }, 3000);
+
+  setTimeout(() => toast.remove(), 3300);
 }
 
-// ===== CART DRAWER =====
-
-const cartToggle = document.getElementById("cart-toggle");
+const cartBtn = document.getElementById("cart-toggle");
 const cartDrawer = document.getElementById("cart-drawer");
 const cartOverlay = document.getElementById("cart-overlay");
-const cartClose = document.getElementById("cart-close");
 
-cartToggle.addEventListener("click", () => {
+function openCart() {
   cartDrawer.classList.add("open");
   cartOverlay.classList.add("active");
-});
+  document.body.classList.add("no-scroll");
+  cartBtn.classList.add("hidden");
+}
 
 function closeCart() {
   cartDrawer.classList.remove("open");
   cartOverlay.classList.remove("active");
+  document.body.classList.remove("no-scroll");
+  cartBtn.classList.remove("hidden");
 }
 
+cartBtn.addEventListener("click", openCart);
 cartOverlay.addEventListener("click", closeCart);
 
 const checkoutBtn = document.querySelector(".checkout-btn");
 const checkoutModal = document.getElementById("checkout-modal");
 const checkoutOverlay = document.getElementById("checkout-overlay");
+const checkoutCloseBtn = document.getElementById("checkout-close");
 
 checkoutBtn.addEventListener("click", () => {
   checkoutModal.classList.add("open");
   checkoutOverlay.classList.add("active");
 });
 
-checkoutOverlay.addEventListener("click", closeCheckout);
-
 function closeCheckout() {
   checkoutModal.classList.remove("open");
   checkoutOverlay.classList.remove("active");
 }
 
-const confirmBtn = document.querySelector(".confirm-btn");
+checkoutOverlay.addEventListener("click", closeCheckout);
+checkoutCloseBtn.addEventListener("click", closeCheckout);
 
-confirmBtn.addEventListener("click", () => {
-  if (cart.length === 0) {
+
+document.querySelector(".confirm-btn").addEventListener("click", () => {
+  if (!cart.length) {
     showToast("🛑 Cart is empty");
     return;
   }
 
-  const paymentMethod = document.querySelector(
-    'input[name="payment"]:checked'
-  ).value;
+  showToast("✅ Order confirmed. Thank you!");
 
-  handleCheckout(paymentMethod);
+  cart = [];
+  saveCart();
+  updateCartUI();
+
+  closeCheckout();
+  closeCart();
 });
-
-function handleCheckout(method) {
-  switch (method) {
-    case "cash":
-      completeOrder("💵 Cash payment selected");
-      break;
-
-    case "card":
-      completeOrder("💳 Card payment selected");
-      break;
-
-    case "applepay":
-      completeOrder("🍎 Apple Pay selected");
-      break;
-
-    default:
-      showToast("❌ Payment error");
-  }
-}
-
-function completeOrder(message) {
-  showToast(message);
-
-  setTimeout(() => {
-    showToast("✅ Order confirmed. Thank you!");
-
-    cart = [];
-    saveCart();
-    updateCartUI();
-
-    closeCheckout();
-    closeCart();
-  }, 1000);
-}
 
 
 loadCart();
 renderMenu();
+
