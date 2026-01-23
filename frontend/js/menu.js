@@ -1,3 +1,4 @@
+// Зробити з цього дата базу(витягувати данні с дефолт файла і закидувати в сайт)
 const hotDrinks = [
   { title: "Espresso", price: "8.00 zł", image: "/images/menu/espresso.jpg" },
   { title: "Americano", price: "9.00 zł", image: "/images/menu/americano.jpg" },
@@ -263,19 +264,16 @@ function closeCart() {
 }
 
 cartOverlay.addEventListener("click", closeCart);
-cartClose.addEventListener("click", closeCart);
 
 const checkoutBtn = document.querySelector(".checkout-btn");
 const checkoutModal = document.getElementById("checkout-modal");
 const checkoutOverlay = document.getElementById("checkout-overlay");
-const checkoutClose = document.getElementById("checkout-close");
 
 checkoutBtn.addEventListener("click", () => {
   checkoutModal.classList.add("open");
   checkoutOverlay.classList.add("active");
 });
 
-checkoutClose.addEventListener("click", closeCheckout);
 checkoutOverlay.addEventListener("click", closeCheckout);
 
 function closeCheckout() {
