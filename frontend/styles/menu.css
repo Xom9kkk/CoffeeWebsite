@@ -94,7 +94,7 @@ body.no-scroll {
 .menu-title {
   font-size: 64px;
   font-weight: 800;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
 }
 
 .menu-controls {
@@ -104,6 +104,7 @@ body.no-scroll {
   gap: 24px;
   margin-bottom: 64px;
   flex-wrap: wrap;
+  
 }
 
 .categories {
@@ -142,7 +143,7 @@ body.no-scroll {
 
 .menu-card {
   background: #fff;
-  border-radius: 22px;
+  border-radius: 18px;
   border: 1px solid #eee;
   overflow: hidden;
   transition: transform 0.25s ease;
@@ -169,15 +170,23 @@ body.no-scroll {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
+  
 }
 
 .menu-price {
-  font-size: 14px;
-  opacity: 0.7;
+  display: inline-block;
+  background: #f1f1ed;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
+  color: #6b4f3f;
+  margin: 12px 0 0px;
 }
 
 .order-btn {
-  margin-top: 14px;
+  margin-top: 10px;
   padding: 14px 32px;
   background: #000;
   color: #fff;
@@ -551,3 +560,4 @@ body.no-scroll {
   font-weight: 800;
   line-height: 1;
 }
+
