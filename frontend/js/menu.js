@@ -219,20 +219,48 @@ function closeCheckout() {
 checkoutOverlay.addEventListener("click", closeCheckout);
 checkoutCloseBtn.addEventListener("click", closeCheckout);
 
-document.querySelector(".confirm-btn").addEventListener("click", () => {
+document.querySelector(".confirm-btn").addEventListener("click", async () => {
   if (!cart.length) {
     showToast("🛑 Cart is empty");
     return;
   }
 
-  showToast("✅ Order confirmed. Thank you!");
+  const payment = document.querySelector(
+    'input[name="payment"]:checked'
+  ).value;
 
-  cart = [];
-  saveCart();
-  updateCartUI();
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        cart,
+        payment
+      })
+    });
 
-  closeCheckout();
-  closeCart();
+    const data = await res.json();
+
+    if (!data.success) {
+      showToast("❌ Order failed");
+      return;
+    }
+
+    showToast(`✅Your Order Confirmed`);
+
+    cart = [];
+    saveCart();
+    updateCartUI();
+
+    closeCheckout();
+    closeCart();
+
+  } catch (err) {
+    console.error(err);
+    showToast("⚠️ Server error");
+  }
 });
 
 
