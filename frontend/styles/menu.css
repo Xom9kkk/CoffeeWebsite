@@ -15,13 +15,17 @@ body.no-scroll {
 }
 
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  z-index: 1000;
   background: #d3d5d0;
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid black;
 }
 
 .header-inner {
-  max-width: 1300px;
+  max-width: auto;
   margin: 0 auto;
   padding: 16px 32px;
   display: flex;
@@ -88,7 +92,7 @@ body.no-scroll {
 .menu {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0px 28px 120px;
+  padding: 100px 28px 120px;
 }
 
 .menu-title {
