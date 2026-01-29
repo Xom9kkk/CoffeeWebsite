@@ -1,109 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Menu | Coffee Lab</title>
-  <link rel="stylesheet" href="/styles/menu.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu | Coffee Lab</title>
+    <link rel="stylesheet" href="/styles/menu.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
 </head>
 
 <body>
     <header class="site-header hero">
-      <div class="header-inner">
-        <div class="nav-logo">
-          <a href="index.html">
-            <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
-          </a>
+        <div class="header-inner">
+            <div class="nav-logo">
+                <a href="index.html"><img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" /></a>
+            </div>
+        
+            <nav class="nav">
+                <div class="nav-buttons">
+                    <a href="#shop">Our shop <sup>NEW</sup></a>
+                    <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
+                    <a href="#us">About Us</a>
+                    <a href="locations.html">Locations</a>
+                </div>
+            </nav>
         </div>
-        
-        <nav class="nav">
-          <div class="nav-buttons">
-            <a href="#shop">Our shop <sup>NEW</sup></a>
-            <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
-            <a href="#us">About Us</a>
-            <a href="locations.html">Locations</a>
-          </div>
-        </nav>
-        
-      </div>
     </header>
 
     <div id="cart-overlay" class="cart-overlay"></div>
 
     <aside id="cart-drawer" class="cart-drawer">
-      <ul id="cart-items"></ul>
-
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total:</span>
-          <strong><span id="cart-total">0.00</span> zł</strong>
-        </div>                
+        <ul id="cart-items"></ul>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <strong><span id="cart-total">0.00</span> zł</strong>
+            </div>                
         <button class="checkout-btn">Checkout</button>
-      </div>
+        </div>
     </aside>
 
     <main class="menu">
-      <h1 class="menu-title">Menu</h1>
+        <h1 class="menu-title">Menu</h1>
 
-      <div class="menu-controls">
-        <div class="categories">
-          <button class="cat-btn active" data-category="all">All</button>
-          <button class="cat-btn" data-category="hot">Hot Drinks</button>
-          <button class="cat-btn" data-category="cold">Cold Drinks</button>
-          <button class="cat-btn" data-category="seasonal">Seasonal</button>
-          <button class="cat-btn" data-category="tea">Tea & Other</button>
-          <button class="cat-btn" data-category="smoothies">Smoothies</button>
-          <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+        <div class="menu-controls">
+            <div class="categories">
+                <button class="cat-btn active" data-category="all">All</button>
+                <button class="cat-btn" data-category="hot">Hot Drinks</button>
+                <button class="cat-btn" data-category="cold">Cold Drinks</button>
+                <button class="cat-btn" data-category="seasonal">Seasonal</button>
+                <button class="cat-btn" data-category="tea">Tea & Other</button>
+                <button class="cat-btn" data-category="smoothies">Smoothies</button>
+                <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+            </div>
+            <select id="sort">
+                <option value="default">Sort by price</option>
+                <option value="asc">Price: Low → High</option>
+                <option value="desc">Price: High → Low</option>
+            </select>
         </div>
 
-        <select id="sort">
-          <option value="default">Sort by price</option>
-          <option value="asc">Price: Low → High</option>
-          <option value="desc">Price: High → Low</option>
-        </select>
-      </div>
-
-      <div id="menu-container"></div>
+        <div id="menu-container"></div>
     </main>
-
-    <button id="cart-toggle" class="cart-toggle floating-cart" aria-label="Open cart">
-      🛒 <span id="cart-count">0</span>
-    </button>
-
+    <button id="cart-toggle" class="cart-toggle floating-cart" aria-label="Open cart">🛒 <span id="cart-count">0</span></button>
     <div id="checkout-overlay" class="checkout-overlay"></div>
 
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-header">
+            <h3>Payment method</h3>
+            <button id="checkout-close">✕</button>
+        </div>
 
-  <div id="checkout-modal" class="checkout-modal">
-    <div class="checkout-header">
-      <h3>Payment method</h3>
-      <button id="checkout-close">✕</button>
+        <div class="checkout-options">
+            <label class="pay-option">
+                <input type="radio" name="payment" value="cash" checked/>
+                <span class="pay-icon">💵</span>
+                <span class="pay-text">Cash</span>
+            </label>
+        
+            <label class="pay-option">
+                <input type="radio" name="payment" value="card" />
+                <span class="pay-icon">💳</span>
+                <span class="pay-text">Card</span>
+            </label>
+        
+            <label class="pay-option apple">
+                <input type="radio" name="payment" value="applepay" />
+                <span class="pay-icon">🍎</span>
+                <span class="pay-text">Apple Pay</span>
+            </label>
+        </div>
+
+        <button class="confirm-btn">Confirm order</button>
     </div>
-
-    <div class="checkout-options">
-      <label class="pay-option">
-        <input type="radio" name="payment" value="cash" checked/>
-        <span class="pay-icon">💵</span>
-        <span class="pay-text">Cash</span>
-      </label>
-      
-      <label class="pay-option">
-        <input type="radio" name="payment" value="card" />
-        <span class="pay-icon">💳</span>
-        <span class="pay-text">Card</span>
-      </label>
-      
-      <label class="pay-option apple">
-        <input type="radio" name="payment" value="applepay" />
-        <span class="pay-icon">🍎</span>
-        <span class="pay-text">Apple Pay</span>
-      </label>
-    </div>
-
-    <button class="confirm-btn">Confirm order</button>
-  </div>
     <div id="toast-container"></div>
     <script src="/js/menu.js"></script>
 </body>
