@@ -1,10 +1,6 @@
 let products = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* =========================
-   DOM
-========================= */
-
 const grid = document.getElementById("shopGrid");
 
 const cartToggle = document.getElementById("cart-toggle");
@@ -24,19 +20,12 @@ const checkoutOverlay = document.getElementById("checkout-overlay");
 const checkoutClose = document.getElementById("checkout-close");
 const confirmBtn = document.querySelector(".confirm-btn");
 
-/* =========================
-   INIT
-========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   bindUI();
   loadProducts();
   renderCart();
 });
-
-/* =========================
-   UI BINDINGS
-========================= */
 
 function bindUI() {
 
@@ -73,10 +62,6 @@ function bindUI() {
   confirmBtn.onclick = checkout;
 }
 
-/* =========================
-   CHECKOUT MODAL
-========================= */
-
 function openCheckout() {
   checkoutModal.classList.add("open");
   checkoutOverlay.classList.add("active");
@@ -86,10 +71,6 @@ function closeCheckout() {
   checkoutModal.classList.remove("open");
   checkoutOverlay.classList.remove("active");
 }
-
-/* =========================
-   PRODUCTS
-========================= */
 
 async function loadProducts() {
   try {
@@ -130,10 +111,6 @@ function renderProducts(filter = "all", sort = "default") {
     grid.appendChild(card);
   });
 }
-
-/* =========================
-   CART
-========================= */
 
 function addToCart(id) {
 
@@ -206,10 +183,6 @@ function removeItem(id) {
   cart = cart.filter(i => i.id !== id);
 }
 
-/* =========================
-   CHECKOUT → BACKEND
-========================= */
-
 async function checkout() {
 
   if (!cart.length) {
@@ -253,10 +226,6 @@ async function checkout() {
     showToast("Server error ❌");
   }
 }
-
-/* =========================
-   TOAST
-========================= */
 
 function showToast(text) {
 
