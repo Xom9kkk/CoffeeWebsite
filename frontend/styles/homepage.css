@@ -1,0 +1,322 @@
+body {
+  font-family: "Zalando Sans Expanded", Arial, sans-serif;
+  margin: 0;
+}
+.hero {
+  position: relative;
+  height: 500px;
+  background: url("../images/homepage/background.jpg") center / cover no-repeat;
+  border-bottom: 3px solid black;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d3d5d0;
+  border-bottom: 3px solid black;
+  padding: 12px 40px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+.nav-logo img {
+  height: 52px;
+}
+.nav-buttons a {
+  margin-left: 28px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-buttons a:hover {
+  color: #f55a34;
+  transition: 0.3s;
+}
+.nav-buttons sup {
+  color: #f55a34;
+}
+
+.hero-content {
+  position: absolute;
+  left: 40px;
+  bottom: 120px;
+}
+.hero-coffee {
+  position: absolute;
+  right: -650px;
+  top: -60px;
+  width: 300px;
+  height: auto;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85));
+}
+
+.hero-content h1 {
+  font-size: 43px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+}
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #f55a34;
+  color: #000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 18px;
+}
+.btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: ">>";
+  position: absolute;
+  opacity: 0;
+  right: -10px;
+  transition: 0.5s;
+}
+.btn:hover span {
+  padding-right: 22px;
+}
+
+.btn:hover span::after {
+  opacity: 1;
+  right: 0;
+}
+
+.statement {
+  padding: 160px 20px;
+  background: #f55a34;
+  text-align: center;
+  border-bottom: 3px solid black;
+}
+.btn-shop {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 14px 32px;
+  background: #d3d5d03f;
+  color: #000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 18px;
+  transition: transform 0.3s;
+  border-color: #3d1c07;
+  border-width: 3px solid black;
+}
+.btn-shop:hover {
+  background: rgb(255, 255, 255);
+  transform: scale(1.05);
+}
+.statement-text {
+  position: relative;
+  font-size: 32px;
+  line-height: 1.5;
+  color: white;
+  max-width: 720px;
+  margin: auto;
+}
+.start-quote,
+.end-quote {
+  position: absolute;
+  font-size: 140px;
+  font-weight: 900;
+  color: rgba(61, 28, 7, 0.25);
+  pointer-events: none;
+  animation: float 4s ease-in-out infinite;
+}
+.start-quote {
+  left: -40px;
+  top: -10px;
+}
+.end-quote {
+  right: -40px;
+  bottom: -60px;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.blends {
+  padding: 40px;
+
+  background:
+    linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(61, 28, 7, 0.82) 70%),
+    url("../images/homepage/bean-types.jpg") center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.blends h2 {
+  font-size: 26px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  max-width: 420px;
+}
+.roast {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #3d1c07;
+}
+
+.roast-level {
+  font-weight: 800;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.roast-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(61, 28, 7, 0.25);
+}
+
+.dot.active {
+  background: #f55a34;
+}
+
+.roast-type {
+  margin-left: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.slideshow {
+  position: relative;
+  max-width: 460px;
+  padding-bottom: 72px;
+}
+.slide-content {
+  background: #fcfff9c0;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeSlide 0.6s ease;
+}
+.slide-content h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: rgb(61, 28, 7);
+  letter-spacing: 0.05em;
+}
+.description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgb(61, 28, 7);
+}
+.numbertext {
+  display: inline-block;
+  background: rgba(245, 90, 52, 0.8);
+  color: rgb(61, 28, 7);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.prev,
+.next {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+
+  background: #d3d5d0b2;
+  color: #000;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.prev {
+  transform: translateX(-56px);
+}
+
+.next {
+  transform: translateX(12px);
+}
+
+.prev:hover {
+  background: #f55a34;
+  transform: translateX(-56px) scale(1.1);
+}
+
+.next:hover {
+  background: #f55a34;
+  transform: translateX(12px) scale(1.1);
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* .choosing {
+  padding: 80px 40px;
+  background: #f55a34;
+}
+.choosing h2 {
+  font-size: 26px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65);
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  max-width: 900px;
+}
+.reason {
+  border-radius: 20px;
+  transition: transform 0.7s ease;
+}
+.reason:hover {
+  transform: translateY(-10px);
+  background: #fcfff94d;
+}
+.reason img {
+  width: 50px;
+  margin-bottom: 16px;
+}
+.reason h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: rgb(61, 28, 7);
+}
+.reason p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.75;
+} */
