@@ -7,6 +7,7 @@ CORS(app)
 
 MENU_DB = "DB/menu.db"
 ORDERS_DB = "DB/orders.db"
+PRODUCTS_DB = "DB/products.db"
 
 
 def get_menu_db():
@@ -21,7 +22,6 @@ def get_orders_db():
     return conn
 
 
-# -------- MENU --------
 @app.route("/api/menu")
 def get_menu():
     db = get_menu_db()
@@ -30,7 +30,6 @@ def get_menu():
     return jsonify([dict(i) for i in items])
 
 
-# -------- ORDERS --------
 @app.route("/api/orders", methods=["POST"])
 def create_order():
     data = request.json
@@ -78,6 +77,18 @@ def create_order():
         "order_id": order_id
     })
 
+def get_products():
+    conn = sqlite3.connect(PRODUCTS_DB)
+    conn.row_factory = sqlite3.Row
+
+    rows = conn.execute("SELECT * FROM products").fetchall()
+    conn.close()
+
+    return [dict(row) for row in rows]
+
+@app.route("/api/products")
+def products():
+    return jsonify(get_products())
 
 if __name__ == "__main__":
     app.run(debug=True)

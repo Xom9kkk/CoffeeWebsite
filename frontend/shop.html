@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu | Coffee Lab</title>
+    <title>Our Shop | Coffee Lab</title>
+
+    <!-- використовуємо ТВОЇ 500 рядків menu.css -->
     <link rel="stylesheet" href="./styles/menu.css" />
+    <link rel="stylesheet" href="./styles/shop.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet"/>
@@ -14,13 +18,15 @@
     <header class="site-header hero">
         <div class="header-inner">
             <div class="nav-logo">
-                <a href="index.html"><img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" /></a>
+                <a href="index.html">
+                    <img src="images/homepage/logo-cropped.png" alt="Coffee Lab logo" />
+                </a>
             </div>
         
             <nav class="nav">
                 <div class="nav-buttons">
-                    <a href="shop.html">Our shop <sup>NEW</sup></a>
-                    <a href="menu.html" class="active">Menu<sup>NEW</sup></a>
+                    <a href="shop.html" class="active">Our shop <sup>NEW</sup></a>
+                    <a href="menu.html">Menu<sup>NEW</sup></a>
                     <a href="#us">About Us</a>
                     <a href="locations.html">Locations</a>
                 </div>
@@ -32,38 +38,47 @@
 
     <aside id="cart-drawer" class="cart-drawer">
         <ul id="cart-items"></ul>
+
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
                 <strong><span id="cart-total">0.00</span> zł</strong>
-            </div>                
-        <button class="checkout-btn">Checkout</button>
+            </div>
+            <button id="checkoutBtn" class="checkout-btn">Checkout</button>
         </div>
     </aside>
 
-    <main class="menu">
-        <h1 class="menu-title">Menu</h1>
+
+    <main class="menu"> 
+
+        <h1 class="menu-title">Our Shop</h1>
 
         <div class="menu-controls">
+
             <div class="categories">
                 <button class="cat-btn active" data-category="all">All</button>
-                <button class="cat-btn" data-category="hot">Hot Drinks</button>
-                <button class="cat-btn" data-category="cold">Cold Drinks</button>
-                <button class="cat-btn" data-category="seasonal">Seasonal</button>
-                <button class="cat-btn" data-category="tea">Tea & Other</button>
-                <button class="cat-btn" data-category="smoothies">Smoothies</button>
-                <button class="cat-btn" data-category="breakfasts">Breakfasts</button>
+                <button class="cat-btn" data-category="tshirt">T-Shirts</button>
+                <button class="cat-btn" data-category="bag">Bags</button>
+                <button class="cat-btn" data-category="mug">Mugs</button>
             </div>
+
             <select id="sort">
                 <option value="default">Sort by price</option>
                 <option value="asc">Price: Low → High</option>
                 <option value="desc">Price: High → Low</option>
             </select>
+
         </div>
 
-        <div id="menu-container"></div>
+        <div id="shopGrid" class="cards-grid"></div>
+
     </main>
-    <button id="cart-toggle" class="cart-toggle floating-cart" aria-label="Open cart">🛒 <span id="cart-count">0</span></button>
+
+
+    <button id="cart-toggle" class="cart-toggle floating-cart" aria-label="Open cart">
+        🛒 <span id="cart-count">0</span>
+    </button>
+
     <div id="checkout-overlay" class="checkout-overlay"></div>
 
     <div id="checkout-modal" class="checkout-modal">
@@ -73,28 +88,31 @@
         </div>
 
         <div class="checkout-options">
+
             <label class="pay-option">
                 <input type="radio" name="payment" value="cash" checked/>
                 <span class="pay-icon">💵</span>
-                <span class="pay-text">Cash</span>
+                <span>Cash</span>
             </label>
-        
+
             <label class="pay-option">
-                <input type="radio" name="payment" value="card" />
+                <input type="radio" name="payment" value="card"/>
                 <span class="pay-icon">💳</span>
-                <span class="pay-text">Card</span>
+                <span>Card</span>
             </label>
-        
-            <label class="pay-option apple">
-                <input type="radio" name="payment" value="applepay" />
+
+            <label class="pay-option">
+                <input type="radio" name="payment" value="applepay"/>
                 <span class="pay-icon">🍎</span>
-                <span class="pay-text">Apple Pay</span>
+                <span>Apple Pay</span>
             </label>
+
         </div>
 
         <button class="confirm-btn">Confirm order</button>
     </div>
     <div id="toast-container"></div>
-    <script src="./script/menu.js"></script>
+    <script src="./script/shop.js"></script>
+
 </body>
 </html>
